@@ -1,0 +1,45 @@
+Comando: npx playwright test tests/integracion/reserva-ui-api.spec.ts --project=chromium --workers=1 --output=test-results/evidencia-ui-api
+
+Running 1 test using 1 worker
+
+(node:11252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › tests\integracion\reserva-ui-api.spec.ts:7:5 › UI + API - confirmar y consultar la misma reserva (10.4s)
+
+
+  1) [chromium] › tests\integracion\reserva-ui-api.spec.ts:7:5 › UI + API - confirmar y consultar la misma reserva 
+
+    TimeoutError: locator.click: Timeout 5000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Reserve Now', exact: true })
+
+
+       at ..\src\pages\PaginaReserva.ts:43
+
+      41 |
+      42 |     await this.page.locator(`#rooms a[href^="/reservation/${reserva.roomid}?"]`).click();
+    > 43 |     await this.page.getByRole('button', { name: 'Reserve Now', exact: true }).click({ timeout: 5_000 });
+         |                                                                               ^
+      44 |   }
+      45 |
+      46 |   async enviarReserva(huesped: Required<Pick<Reserva, 'firstname' | 'lastname' | 'email' | 'phone'>>) {
+        at PaginaReserva.abrirFormulario (C:\proyectosRepo\automatizacion-reservas-restful-booker\src\pages\PaginaReserva.ts:43:79)
+        at C:\proyectosRepo\automatizacion-reservas-restful-booker\tests\integracion\reserva-ui-api.spec.ts:43:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\evidencia-ui-api\integracion-reserva-ui-api-5d8e7--consultar-la-misma-reserva-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\evidencia-ui-api\integracion-reserva-ui-api-5d8e7--consultar-la-misma-reserva-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\evidencia-ui-api\integracion-reserva-ui-api-5d8e7--consultar-la-misma-reserva-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\evidencia-ui-api\integracion-reserva-ui-api-5d8e7--consultar-la-misma-reserva-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests\integracion\reserva-ui-api.spec.ts:7:5 › UI + API - confirmar y consultar la misma reserva 
+Codigo de salida: 1

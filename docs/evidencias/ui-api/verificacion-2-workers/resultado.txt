@@ -1,0 +1,78 @@
+Comando: npx playwright test --project=chromium --workers=2 --output=test-results/verificacion-2-workers
+
+Running 5 tests using 2 workers
+
+(node:2332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11748) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\api\autenticacion.spec.ts:4:5 › Obtener un token de autenticación válido (5.2s)
+  ok 2 [chromium] › tests\api\reserva-negativa.spec.ts:11:7 › No permitir reserva con nombre Mc (5.9s)
+  ok 3 [chromium] › tests\api\reserva-negativa.spec.ts:11:7 › No permitir reserva con nombre CatalinaOsorioVargas (1.2s)
+  x  4 [chromium] › tests\api\reserva-positiva.spec.ts:6:5 › API positiva - crear y consultar una reserva (3.6s)
+  x  5 [chromium] › tests\integracion\reserva-ui-api.spec.ts:5:5 › UI + API - confirmar y consultar la misma reserva (6.0s)
+
+
+  1) [chromium] › tests\api\reserva-positiva.spec.ts:6:5 › API positiva - crear y consultar una reserva 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 201
+    Received: 409
+
+      58 |   // 4. Crear la reserva
+      59 |   const respuesta = await clienteReservas.crearReserva(reserva);
+    > 60 |   expect(respuesta.status()).toBe(201);
+         |                              ^
+      61 |
+      62 |   const reservaCreada = await respuesta.json();
+      63 |
+        at C:\proyectosRepo\automatizacion-reservas-restful-booker\tests\api\reserva-positiva.spec.ts:60:30
+
+    Error Context: test-results\verificacion-2-workers\api-reserva-positiva-API-p-3b0e1-ear-y-consultar-una-reserva-chromium\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\verificacion-2-workers\api-reserva-positiva-API-p-3b0e1-ear-y-consultar-una-reserva-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\verificacion-2-workers\api-reserva-positiva-API-p-3b0e1-ear-y-consultar-una-reserva-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests\integracion\reserva-ui-api.spec.ts:5:5 › UI + API - confirmar y consultar la misma reserva 
+
+    Error: GET /api/room/1
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 500
+
+       7 |
+       8 |   const detalle = await paginaReserva.seleccionarHabitacion(reserva);
+    >  9 |   expect(detalle.status(), `GET /api/room/${roomid}`).toBe(200);
+         |                                                       ^
+      10 |
+      11 |   await paginaReserva.abrirFormulario();
+      12 |   const creacion = await paginaReserva.enviarReserva(reserva);
+        at C:\proyectosRepo\automatizacion-reservas-restful-booker\tests\integracion\reserva-ui-api.spec.ts:9:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\verificacion-2-workers\integracion-reserva-ui-api-5d8e7--consultar-la-misma-reserva-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\verificacion-2-workers\integracion-reserva-ui-api-5d8e7--consultar-la-misma-reserva-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\verificacion-2-workers\integracion-reserva-ui-api-5d8e7--consultar-la-misma-reserva-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\verificacion-2-workers\integracion-reserva-ui-api-5d8e7--consultar-la-misma-reserva-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests\api\reserva-positiva.spec.ts:6:5 › API positiva - crear y consultar una reserva 
+    [chromium] › tests\integracion\reserva-ui-api.spec.ts:5:5 › UI + API - confirmar y consultar la misma reserva 
+  3 passed (14.2s)
+Codigo de salida: 1
